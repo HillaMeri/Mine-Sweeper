@@ -7,45 +7,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/main.css">
-    <link rel="stylesheet" href="style/heart.css">
+    <!-- <link rel="stylesheet" href="style/heart.css"> -->
 </head>
 
 <body onload="init()">
     <div class="bgc-img">
-    <h1 class="title">Mine Sweeper</h1>
-
-    <div class="data">
-        <label class="time"> Game Time: </label> 
-        <label class='number'></label>
+        <h1 class="title">Mine Sweeper</h1>
+        <table id="score"></table>
+        <marquee class="modal-live" behavior="scroll" direction="left" scrollamount="20"> </marquee>
+        <div class="data">
+            <label class="func time"> Game Time: </label>
+            <label class="func number"></label>
+        </div>
+        <div class="modal-win rotate-center"></div>
+        <fieldset class="choose-level">
+            <legend>Choose Level Game</legend>
+            <input onclick="init(4)" type="radio" name="level" id="EAZY_SIZE">
+            <label for="Easy">Easy(4)</label><br />
+            <input onclick="init(8)" type="radio" name="level" id="HARD_SIZE">
+            <label for="Hard">Hard(8)</label><br />
+            <input onclick="init(12)" type="radio" name="level" id="EXTERNAL_SIZE">
+            <label for="Extrenel">Extrenel!(12)</label>
+        </fieldset>
+        <label class="manually" onclick="manuallyPositionClicked()" >Manually</label>
+        <div class="hints"></div>
+        <table>
+            <tbody class="board"></tbody>
+        </table>
+        <button class="safe-click btn-dec" onclick=markSafeClick()>🤞</button>
+        <button class="new-game btn-dec" onclick=init()>😄</button>
+        <button class="undo btn-dec" onclick=goBack()>↪</button>
+        <div id="heart">
+        </div>
+        <div class="modal">
+            <h3></h3>
+        </div>
     </div>
-    <div class="modal-win rotate-center"></div>
-
-    <fieldset class="choose-level">
-        <legend>Choose Level Game</legend>
-        <input onclick="init(4)" type="radio" name="level" id="EAZY_SIZE">
-        <label for="Easy">Easy(4)</label><br />
-        <input onclick="init(8)" type="radio" name="level" id="HARD_SIZE">
-        <label for="Hard">Hard(8)</label><br />
-        <input onclick="init(12)" type="radio" name="level" id="EXTERNAL_SIZE">
-        <label for="Extrenel">Extrenel!(12)</label>
-    </fieldset>
-
-    <div class="hints"></div>
-    <table>
-        <tbody class="board"></tbody>
-    </table>
-    <button class="new-game" onclick=init()>😄</button>
-<div id= "heart"></div> 
-    <div class="modal">
-        <h3></h3>
-    </div>
-</div>
-        <script src=" js/main.js"></script>
-        <script src=" js/utils.js"></script>
-        <script src=" js/clicks.js"></script>
-        <script src=" js/time.js"></script>
-        <script src=" js/hints.js"></script>
-        <script src=" js/render.js"></script>
+    <script src=" js/game.js"></script>
+    <script src=" js/utils.js"></script>
+    <script src=" js/clicks.js"></script>
+    <script src=" js/time.js"></script>
+    <script src=" js/hints.js"></script>
+    <script src=" js/render.js"></script>
+    <script src=" js/score.js"></script>
 </body>
 
 </html>

@@ -9,13 +9,11 @@ function hintClicked(elImg) {
     gHint = true;
     elImg.src = "img/1.png";
     elImg.classList.add("hint-clicked");
-
 }
 
 function hintShow(i, j) {
     var cell = { i: i, j: j };
     var negs = openNegsWithBooms(gBoard, cell);
-    console.log('negs,', negs);
     gHint = false;
     setTimeout(() => {
         hintHide(negs);
@@ -25,10 +23,14 @@ function hintShow(i, j) {
 function hintHide(negs) {
     for (var i = 0; i < negs.length; i++) {
         var selector = '.cell-' + negs[i].i + "-" + negs[i].j;
-        var elCell = document.querySelector(selector);
-        elCell.innerText = '';
+        hideCell(selector)
+        // var elCell = document.querySelector(selector);
+        // elCell.innerText = '';
     }
 }
+
+
+
 
 function randerHints() {
     gHint = false;

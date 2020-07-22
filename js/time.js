@@ -4,7 +4,7 @@ var gTime;
 function renderTimeLabel() {
     clearTimeout(gInteravlTime);
     var elTime = document.querySelector('.time');
-    elTime.innerHTML = '⏰Game Time:';
+    elTime.innerHTML = '⏳Game Time:';
 }
 
 

@@ -23,7 +23,22 @@ function renderNumbersOfGuess() {
     elNum.innerText = numToPrint;
 }
 
-function renderEmoji(){
+function renderEmoji() {
     var elNewGame = document.querySelector('.new-game');
     elNewGame.innerText = '😄';
+}
+
+
+function renderLives() {
+    var elLives = document.querySelector('.modal-live');
+    elLives.innerText = (gLivesCount >= 0) ? 'YOU HAVE ' + gLivesCount + ' LIVES ❤' : '';
+}
+
+
+function randerHints() {
+    gHint = false;
+    var elHints = document.querySelector('.hints');
+    elHints.innerHTML = `<img src="img/2.png" onclick="hintClicked(this)"
+     /><img src="img/2.png" onclick="hintClicked(this)" />
+    <img src="img/2.png" onclick="hintClicked(this)" />`
 }

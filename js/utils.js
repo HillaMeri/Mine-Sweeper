@@ -24,18 +24,19 @@ function countNegs(board, pos) {
 }
 
 function openNegs(board, pos) {
-    var negs = [];
+    var movesNegs = [];
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
-            if (i === pos.i && j === pos.j) continue;
             if (!checkIfInBoard(board, { i: i, j: j })) continue;
             if (board[i][j].isMine === false && !board[i][j].isMarked && !board[i][j].isShown) {
                 var selector = '.cell-' + i + "-" + j;
                 var elCell = document.querySelector(selector);
-                cellChange(i, j, elCell)
+                cellChange(i, j, elCell, true);
+                movesNegs.push({i:i, j:j})
             }
         }
     }
+    gMoves.push(movesNegs);
 }
 
 function openNegsWithBooms(board, pos) {
@@ -44,9 +45,7 @@ function openNegsWithBooms(board, pos) {
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
             if (!checkIfInBoard(board, { i: i, j: j })) continue;
             if (!board[i][j].isMarked && !board[i][j].isShown) {
-                var selector = '.cell-' + i + "-" + j;
-                var elCell = document.querySelector(selector);
-                elCell.innerText = gBoard[i][j].element;
+                showCell(i,j);
                 negs.push({i:i,j:j});
             }
         }
@@ -54,12 +53,27 @@ function openNegsWithBooms(board, pos) {
     return negs;
 }
 
-function cellChange(i, j, elCell) {
+
+function showCell(i,j){
+    var selector = '.cell-' + i + "-" + j;
+    var elCell = document.querySelector(selector);
+    elCell.innerText = gBoard[i][j].element;
+}
+
+function hideCell(selector){
+    // var selector = '.cell-' + negs[i].i + "-" + negs[i].j;
+    var elCell = document.querySelector(selector);
+    elCell.innerText = '';
+}
+
+function cellChange(i, j, elCell, isNegs = false) {
     if (gBoard[i][j].isShown) return;
     elCell.innerText = gBoard[i][j].element;
     gBoard[i][j].isShown = true;
     elCell.classList.add('clicked-Cell');
     gGame.shownCount++;
+    var move = [{i:i, j:j}];
+    if(!isNegs) gMoves.push(move);
 } 
 
 function checkIfInBoard(board, pos) {
@@ -73,7 +87,7 @@ function getAllLocations() {
     for (var i = 0; i < gLevel.size; i++) {
         for (var j = 0; j < gLevel.size; j++) {
             var coord = { i: i, j: j };
-            spaces.push(coord);
+            if(!gBoard[i][j].isMine) spaces.push(coord);
         }
     }
     return spaces;
@@ -84,6 +98,14 @@ function addZeros(num, sign) {
     newNum += Math.abs(num) < 10 ? '0' + Math.abs(num) : Math.abs(num);
     return newNum;
 }
+
+
+function expandShown(board, elCell, i, j) {
+    var pos = { i: i, j: j };
+    openNegs(board, pos);
+
+}
+
 
 // function addMinus(num) {
 //     var newNum = '-';
