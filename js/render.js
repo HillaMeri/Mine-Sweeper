@@ -31,7 +31,6 @@ function randerBoardForUndo(board) {
                 gGame.shownCount++;
                 el = board[i][j].element ? board[i][j].element : '';
                 addClass = "clicked-Cell";
-                if(board[i][j].element === MINE) gRevelMines--;
             }
             
             var className = "cell-" + i + "-" + j;
@@ -51,7 +50,6 @@ function renderNumbersOfGuess() {
     var elNum = document.querySelector('.number');
     var num = gLevel.mines - gGame.markedCount;
     var numToPrint = '';
-    console.log(num);
     if (num < 100) numToPrint = addZeros(num, '0');
     if (num < 0) numToPrint = addZeros(num, '-');
     elNum.innerText = numToPrint;

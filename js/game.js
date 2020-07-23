@@ -111,25 +111,15 @@ function buildBoard() {
     return board;
 }
 
-
 function checkGameOver() {
-    //TODO: Check why isn't working
-    // if (gGame.markedCount + gGame.liveUsed === gLevel.mines || gGame.shownCount ===  gLevel.size * gLevel.size) {
-    //     if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
-    //     saveScore(gLevel.name, gGame.secsPassed);
-    //     endGame('You win', true);
-    // }
-
-    if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
-    for (var i = 0; i < gLevel.size; i++) {
-        for (var j = 0; j < gLevel.size; j++) {
-            if (gBoard[i][j].isMarked && !gBoard[i][j].isMine) return;
-        }
+    if (gGame.markedCount + gGame.liveUsed === gLevel.mines ||
+         gGame.shownCount ===  gLevel.size * gLevel.size) {
+             console.log();
+        if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
+        saveScore(gLevel.name, gGame.secsPassed);
+        endGame('You win', true);
     }
-    saveScore(gLevel.name, gGame.secsPassed);
-    endGame('You win', true);
 }
-
 
 function endGame(txt, win) {
     var elNewGame = document.querySelector('.new-game');

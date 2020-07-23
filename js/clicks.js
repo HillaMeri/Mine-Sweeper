@@ -53,7 +53,6 @@ function cellMarked(elCell, i, j) {
 }
 
 function clickedBoom(elChoose) {
-    gRevelMines++;
     gGame.liveUsed++;
     gLivesCount--;
     if (gLivesCount < 0) {
