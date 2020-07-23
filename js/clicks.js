@@ -91,26 +91,12 @@ function goBack() {
 // }
 
 
-function goBack() {
-    if (!gMoves.length || !gCanClick) return;
-    var move = gMoves.splice(gMoves.length - 2, 1);
-    var moves = [];
-    moves.push(...move[0]);
-    for (var i = 0; i < moves.length; i++) {
-        var selector = '.cell-' + moves[i].i + "-" + moves[i].j;
-        var elCell = document.querySelector(selector);
-        elCell.innerText = '';
-        gBoard[moves[i].i][moves[i].j].isShown = false;
-        elCell.classList.remove('clicked-Cell');
-        gGame.shownCount--;
-    }
-
-}
 
 function newGame() {
     var size = gLevel.size;
     init(size);
 }
+
 
 function revelNegs(i,j){
     var pos = {i:i,j:j};

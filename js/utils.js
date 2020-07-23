@@ -10,7 +10,6 @@ function setMinesNegsCount(board, pos) {
     if (gBoard[pos.i][pos.j].element === EMPTY) gBoard[pos.i][pos.j].element = gBoard[pos.i][pos.j].minesAroundCount;
 }
 
-
 function countNegs(board, pos) {
     var count = 0;
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {

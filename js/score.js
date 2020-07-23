@@ -4,7 +4,7 @@ var gMyStorage;
 function saveScore(level, score) {
     if (typeof (Storage) !== "undefined") {
         if (localStorage.getItem(level) === null || score < localStorage.getItem(level)) {
-            window.localStorage.setItem(level, score);
+            localStorage.setItem(level, score);
             renderScore(level);
         }
     }
@@ -12,7 +12,7 @@ function saveScore(level, score) {
 
 function renderScore(level) {
     if (localStorage.getItem(level) !== null)
-        document.getElementById("score " + level).querySelector('span').innerText = window.localStorage.getItem(level);
+        document.getElementById("score " + level).querySelector('span').innerText = localStorage.getItem(level);
 }
 
 function renderScoreToAllLevels() {

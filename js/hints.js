@@ -4,7 +4,6 @@ var gHint;
 
 const LIME = ''
 
-// var gIntervalHint;
 function hintClicked(elImg) {
     if (!gGame.isOn || gFirstClick) return;
     if (elImg.src === "http://127.0.0.1:5500/img/1.png") return;
@@ -30,7 +29,6 @@ function hintHide(negs) {
         hideCell(selector)
     }
 }
-
 
 
 function markSafeClick() {

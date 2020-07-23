@@ -34,7 +34,6 @@ function randerBoardForUndo(board) {
         }
         htmlStr += '</tr>';
     }
-    console.log('lalalla');
     var elBoard = document.querySelector('.board');
     elBoard.innerHTML = htmlStr;
 }
@@ -73,11 +72,9 @@ function randerHints() {
 
 function renderSafeClick() {
     var sign = '';
-
     for (var i = 0; i < gGame.safeClick; i++) {
         sign += '🤞';
     }
-
     if (!gGame.safeClick) sign = '❌'
     var elSafeClick = document.querySelector('.safe-click');
     elSafeClick.innerText = sign;

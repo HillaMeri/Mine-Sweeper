@@ -13,14 +13,13 @@
     <h1 class="title">Mine Sweeper💣</h1>
     <div class="score">
         <label id="score Easy">Easy Record: <span></span></label>
-        <label id="score Hard">Hard Record:<span></span></label>
-        <label id="score Extrenel">Hard Record:<span></span></label>
+        <label id="score Hard">Hard Record: <span></span></label>
+        <label id="score Extrenel">Hard Record: <span></span></label>
     </div>
 
     <button class="clear-score" onclick="clearScore()">Clear Records</button>
-
-    <marquee class="modal-live" behavior="scroll" direction="right" scrollamount="20"> </marquee>
-
+    <!-- <marquee class="modal-live" behavior="scroll" direction="right" scrollamount="25"> </marquee> -->
+    <div class="modal-live"></div>
     <div class="data">
         <label class="func time"> Game Time: </label>
         <label class="func number"></label>
@@ -36,7 +35,7 @@
     </fieldset>
 
     <div class="hints"></div>
-    
+
     <table>
         <tbody class="board"></tbody>
     </table>
@@ -55,6 +54,7 @@
     <script src=" js/render.js"></script>
     <script src=" js/score.js"></script>
     <script src=" js/manually.js"></script>
+    <script src=" js/mines.js"></script>
 </body>
 
 </html>
