@@ -1,12 +1,3 @@
-/* body {
-    text-align: center;
-    font-family: 'Rowdies', cursive;
-    background-color: rgb(255, 255, 255);
-    background-image: url("/img/bcg14.jpg");
-    color: blanchedalmond;
-} */
-
-
 body {
     text-align: center;
     font-family: 'Rowdies', cursive;
@@ -15,7 +6,7 @@ body {
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 35px;
     margin-bottom: 10px;
 }
 
@@ -32,7 +23,7 @@ h1 {
     margin-bottom: 5px;
     margin-top: 5px;
     font-family: 'Amatic SC', cursive;
-    font-size: 20px;
+    font-size: 15px;
     border: solid rgb(230, 242, 248);
     cursor: pointer;
 }
@@ -41,6 +32,7 @@ h1 {
     opacity: 0.7;
     transform: scale(1.1);
     background-color: rgb(192, 195, 196);
+    color: rgb(87, 160, 81);
 }
 
 .modal-live {
@@ -50,21 +42,21 @@ h1 {
     display: block;
 }
 
-.modal-hide{
+.modal-hide {
     display: none;
 }
 
 .func {
-    background-color: rgb(191, 231, 216);
-    width: 40px;
-    height: 40px;
+    background-color: rgb(144, 212, 144);
+    width: 25px;
+    height: 25px;
     text-align: center;
     color: rgb(17, 16, 16);
     border-style: double;
     padding: 5px;
     border-radius: 10px;
     padding: 5px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 fieldset {
@@ -81,18 +73,19 @@ fieldset {
     display: inline;
     border-width: 5px;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 img {
-    width: 60px;
+    width: 50px;
     height: auto;
     cursor: pointer;
     opacity: 0.7;
 }
 
 img:hover {
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid rgb(223, 74, 123);
 }
 
 .hint-clicked {
@@ -133,7 +126,7 @@ table {
 }
 
 .clicked-Cell {
-    background-color: rgb(178, 240, 220);
+    background-color: rgb(182, 223, 210);
 }
 
 .btn-dec {
@@ -141,14 +134,14 @@ table {
     border-radius: 2em;
     box-sizing: border-box;
     text-decoration: none;
-    color: rgb(37, 71, 122);
+    color: rgb(87, 160, 81);
     outline: none;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     text-align: center;
     transition: all 0.2s;
     margin-bottom: 10px;
     font-family: 'Amatic SC', cursive;
-    font-size: 30px;
+    font-size: 20px;
     border: solid rgb(230, 242, 248);
     margin-top: 20px;
     cursor: pointer;
@@ -168,7 +161,7 @@ table {
 .modal-mines-manually {
     height: 10vh;
     width: 15vw;
-    background-color: rgb(179, 230, 211);
+    background-color: rgb(144, 212, 144);
     /* color: white; */
     opacity: 0.8;
     position: fixed;
@@ -180,6 +173,8 @@ table {
     bottom: 50vh;
     font-size: 40px;
     border-radius: 10px;
+    font-family: 'Amatic SC', cursive;
+
 }
 
 .rotate-center {
@@ -209,10 +204,9 @@ table {
     }
 }
 
-
 .heartbeat {
-	-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
-	        animation: heartbeat 1.5s ease-in-out infinite both;
+    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+    animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
 /* ----------------------------------------------
@@ -227,72 +221,73 @@ table {
  * animation heartbeat
  * ----------------------------------------
  */
- @-webkit-keyframes heartbeat {
+
+@-webkit-keyframes heartbeat {
     from {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-transform-origin: center center;
-              transform-origin: center center;
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
     10% {
-      -webkit-transform: scale(0.91);
-              transform: scale(0.91);
-      -webkit-animation-timing-function: ease-in;
-              animation-timing-function: ease-in;
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
     }
     17% {
-      -webkit-transform: scale(0.98);
-              transform: scale(0.98);
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
     33% {
-      -webkit-transform: scale(0.87);
-              transform: scale(0.87);
-      -webkit-animation-timing-function: ease-in;
-              animation-timing-function: ease-in;
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
     }
     45% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
-  }
-  @keyframes heartbeat {
+}
+
+@keyframes heartbeat {
     from {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-transform-origin: center center;
-              transform-origin: center center;
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
     10% {
-      -webkit-transform: scale(0.91);
-              transform: scale(0.91);
-      -webkit-animation-timing-function: ease-in;
-              animation-timing-function: ease-in;
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
     }
     17% {
-      -webkit-transform: scale(0.98);
-              transform: scale(0.98);
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
     33% {
-      -webkit-transform: scale(0.87);
-              transform: scale(0.87);
-      -webkit-animation-timing-function: ease-in;
-              animation-timing-function: ease-in;
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
     }
     45% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-animation-timing-function: ease-out;
-              animation-timing-function: ease-out;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
-  }
-  
+}

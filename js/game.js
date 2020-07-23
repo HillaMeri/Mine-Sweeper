@@ -5,12 +5,13 @@ var gBoard;
 var gGame;
 var gMines;
 var gLivesCount;
-var gMoves;
 var gMinesInsert;
 var gCanClick;
 var gFirstClick;
-var gOldBoards;
+var gPrevBoards;
 var gInteravlLive;
+var gMovesCount;
+var gRevelMines;
 
 const MINE = '💣'
 const EMPTY = '';
@@ -27,17 +28,19 @@ function init(size = 4) {
         safeClick: 3,
         manually: false
     }
-    // gOldBoards = [];
-    gMoves = [];
+    gPrevBoards = [];
+    gMovesCount = 0;
     gMines = [];
     gMinesInsert = 0;
+    gRevelMines = 0;
     gCanClick = true;
     gLevel = setLevel(size);
     gBoard = buildBoard();
-    // gOldBoards.push(gBoard);
+    gPrevBoards = [];
     gLivesCount = 3;
     gFirstClick = true;
     renderBoard(gBoard);
+
     randerHints();
     renderTimeLabel();
     renderNumbersOfGuess();
@@ -46,7 +49,7 @@ function init(size = 4) {
     renderScoreToAllLevels();
     renderSafeClick();
     closeModalMines();
-    // modalLives('visible');
+    clearInterval(gInteravlLive);
     gInteravlLive = setInterval(modalLives, 1500)
 }
 
@@ -110,11 +113,21 @@ function buildBoard() {
 
 
 function checkGameOver() {
-    if (gGame.markedCount + gGame.liveUsed === gLevel.mines) {
-        if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
-        saveScore(gLevel.name, gGame.secsPassed);
-        endGame('You win', true);
+    //TODO: Check why isn't working
+    // if (gGame.markedCount + gGame.liveUsed === gLevel.mines || gGame.shownCount ===  gLevel.size * gLevel.size) {
+    //     if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
+    //     saveScore(gLevel.name, gGame.secsPassed);
+    //     endGame('You win', true);
+    // }
+
+    if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
+    for (var i = 0; i < gLevel.size; i++) {
+        for (var j = 0; j < gLevel.size; j++) {
+            if (gBoard[i][j].isMarked && !gBoard[i][j].isMine) return;
+        }
     }
+    saveScore(gLevel.name, gGame.secsPassed);
+    endGame('You win', true);
 }
 
 

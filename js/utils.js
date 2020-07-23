@@ -25,7 +25,6 @@ function countNegs(board, pos) {
 function openNegsForDubleClick(board, pos) {
     var movesNegs = [];
     var flag = true;
-    // if(board[pos.i][pos.j].minesAroundCount) return; 
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
             if (!checkIfInBoard(board, { i: i, j: j })) continue;
@@ -43,12 +42,12 @@ function openNegsForDubleClick(board, pos) {
                 var selector = '.cell-' + i + "-" + j;
                 var elCell = document.querySelector(selector);
                 cellChange(i, j, elCell, true);
-                movesNegs.push({ i: i, j: j })
+                // movesNegs.push({ i: i, j: j })
                 openNegs(board, { i: i, j: j });
             }
         }
     }
-    gMoves.push(movesNegs);
+    // gMoves.push(movesNegs);
 }
 
 //for empty places
@@ -63,12 +62,12 @@ function openNegs(board, pos) {
                 var selector = '.cell-' + i + "-" + j;
                 var elCell = document.querySelector(selector);
                 cellChange(i, j, elCell, true);
-                movesNegs.push({ i: i, j: j });
+                // movesNegs.push({ i: i, j: j });
                 openNegs(board, { i: i, j: j });
             }
         }
     }
-    gMoves.push(movesNegs);
+    // gMoves.push(movesNegs);
 }
 
 function expandShown(board, elCell, i, j) {
@@ -120,8 +119,8 @@ function cellChange(i, j, elCell, isNegs = false) {
     gBoard[i][j].isShown = true;
     elCell.classList.add('clicked-Cell');
     gGame.shownCount++;
-    var move = [{ i: i, j: j }];
-    if (!isNegs) gMoves.push(move);
+    // var move = [{ i: i, j: j }];
+    // if (!isNegs) gMoves.push(move);
 }
 
 function checkIfInBoard(board, pos) {
@@ -148,5 +147,29 @@ function addZeros(num, sign) {
 }
 
 
+function copyAllBoard(board) {
+    var copyBoard = [];
+    for (var i = 0; i < board.length; i++) {
+        copyBoard[i] = [];
+        for (var j = 0; j < board.length; j++){
+           
+           
+            var minesAroundCountCopy =  board[i][j].minesAroundCount;
+            var isShownCopy =  board[i][j].isShown;
+            var isMineCopy = board[i][j].isMine;
+            var isMarkedCopy = board[i][j].isMarked;
+            var elementCopy = board[i][j].element;
+            
+            var cellCopy = {
+                minesAroundCount: minesAroundCountCopy,
+                isShown: isShownCopy,
+                isMine : isMineCopy,
+                isMarked : isMarkedCopy,
+                element: elementCopy
+            }
 
-
+            copyBoard[i][j] = cellCopy;
+        }
+    }
+    return copyBoard;
+}

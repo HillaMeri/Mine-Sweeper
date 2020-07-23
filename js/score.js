@@ -1,6 +1,5 @@
 var gMyStorage;
 
-
 function saveScore(level, score) {
     if (typeof (Storage) !== "undefined") {
         if (localStorage.getItem(level) === null || score < localStorage.getItem(level)) {
@@ -26,5 +25,4 @@ function clearScore() {
     document.getElementById("score Easy").querySelector('span').innerText = '';
     document.getElementById("score Hard").querySelector('span').innerText = '';
     document.getElementById("score Extrenel").querySelector('span').innerText = '';
-
 }

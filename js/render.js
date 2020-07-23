@@ -16,16 +16,24 @@ function renderBoard(board) {
 
 function randerBoardForUndo(board) {
     var htmlStr = '';
+    gGame.shownCount = 0;
+    gGame.markedCount = 0;
     for (var i = 0; i < gLevel.size; i++) {
         htmlStr += '<tr>';
         for (var j = 0; j < gLevel.size; j++) {
             var el = '';
             var addClass = " ";
-            if (board[i][j].isMarked) el = GEUSS;
+            if (board[i][j].isMarked) {
+                el = GEUSS;
+                gGame.markedCount++;
+            }
             if (board[i][j].isShown) {
+                gGame.shownCount++;
                 el = board[i][j].element ? board[i][j].element : '';
                 addClass = "clicked-Cell";
+                if(board[i][j].element === MINE) gRevelMines--;
             }
+            
             var className = "cell-" + i + "-" + j;
             htmlStr += `<td class="cell ${className} ${addClass} "
              onclick = "cellClicked(this, ${i},${j})" 
