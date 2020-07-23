@@ -1,18 +1,30 @@
 var gMyStorage;
 
 
-function saveScore(){
-    if (typeof(Storage) !== "undefined") {
-        // Store
-        window.localStorage.setItem("lastname", "Smith");
-        // Retrieve
-        document.getElementById("score").innerHTML = window.localStorage.getItem("lastname");
-      } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-      }
+function saveScore(level, score) {
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem(level) === null || score < localStorage.getItem(level)) {
+            window.localStorage.setItem(level, score);
+            renderScore(level);
+        }
+    }
 }
 
+function renderScore(level) {
+    if (localStorage.getItem(level) !== null)
+        document.getElementById("score " + level).querySelector('span').innerText = window.localStorage.getItem(level);
+}
 
-function clearScore(){
+function renderScoreToAllLevels() {
+    renderScore("Easy");
+    renderScore("Hard");
+    renderScore("Extrenel");
+}
+
+function clearScore() {
     localStorage.clear();
+    document.getElementById("score Easy").querySelector('span').innerText = '';
+    document.getElementById("score Hard").querySelector('span').innerText = '';
+    document.getElementById("score Extrenel").querySelector('span').innerText = '';
+
 }

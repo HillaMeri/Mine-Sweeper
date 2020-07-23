@@ -4,7 +4,8 @@ function renderBoard(board) {
         htmlStr += '<tr>';
         for (var j = 0; j < gLevel.size; j++) {
             var className = "cell-" + i + "-" + j;
-            htmlStr += `<td class="cell  ${className} " onclick = "cellClicked(this, ${i},${j})" oncontextmenu="cellMarked(this,${i},${j})" data-idI="${i}data-idJ="${j}"></td>`;
+            htmlStr += `<td class="cell  ${className} " onclick = "cellClicked(this, ${i},${j})" 
+            oncontextmenu="cellMarked(this,${i},${j})" ondblclick="revelNegs(${i},${j})"></td>`;
         }
         htmlStr += '</tr>';
     }
@@ -12,6 +13,32 @@ function renderBoard(board) {
     elBoard.innerHTML = htmlStr;
 
 }
+
+function randerBoardForUndo(board) {
+    var htmlStr = '';
+    for (var i = 0; i < gLevel.size; i++) {
+        htmlStr += '<tr>';
+        for (var j = 0; j < gLevel.size; j++) {
+            var el = '';
+            var addClass = " ";
+            if (board[i][j].isMarked) el = GEUSS;
+            if (board[i][j].isShown) {
+                el = board[i][j].element ? board[i][j].element : '';
+                addClass = "clicked-Cell";
+            }
+            var className = "cell-" + i + "-" + j;
+            htmlStr += `<td class="cell ${className} ${addClass} "
+             onclick = "cellClicked(this, ${i},${j})" 
+            oncontextmenu="cellMarked(this,${i},${j})" 
+            ondblclick="revelNegs(${i},${j})">${el}</td>`;
+        }
+        htmlStr += '</tr>';
+    }
+    console.log('lalalla');
+    var elBoard = document.querySelector('.board');
+    elBoard.innerHTML = htmlStr;
+}
+
 
 function renderNumbersOfGuess() {
     var elNum = document.querySelector('.number');
@@ -41,4 +68,18 @@ function randerHints() {
     elHints.innerHTML = `<img src="img/2.png" onclick="hintClicked(this)"
      /><img src="img/2.png" onclick="hintClicked(this)" />
     <img src="img/2.png" onclick="hintClicked(this)" />`
+}
+
+
+function renderSafeClick() {
+    var sign = '';
+
+    for (var i = 0; i < gGame.safeClick; i++) {
+        sign += '🤞';
+    }
+
+    if (!gGame.safeClick) sign = '❌'
+    var elSafeClick = document.querySelector('.safe-click');
+    elSafeClick.innerText = sign;
+
 }

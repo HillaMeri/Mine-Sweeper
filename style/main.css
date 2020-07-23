@@ -2,14 +2,125 @@ body {
     text-align: center;
     font-family: 'Rowdies', cursive;
     background-color: rgb(255, 255, 255);
-}
-
-.bgc-img {
-    background-size: 100% 100%;
+    background-image: url("/img/bcg9.jpg");
 }
 
 h1 {
     font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.clear-score {
+    padding: 0.3em 1.2em;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: rgb(37, 71, 122);
+    outline: none;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    text-align: center;
+    transition: all 0.2s;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    border: solid rgb(230, 242, 248);
+    cursor: pointer;
+    
+}
+
+.clear-score:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+    background-color: rgb(192, 195, 196);
+}
+
+.modal-live {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: rgb(231, 129, 129);
+}
+
+.func {
+    background-color: rgb(191, 231, 216);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: rgb(17, 16, 16);
+    border-style: double;
+    padding: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 25px;
+}
+
+fieldset {
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-image: initial;
+    margin: 20px;
+    border-style: double;
+    display: inline;
+    border-width: 5px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+img {
+    width: 60px;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+img:hover {
+    border-bottom: 1px solid black;
+}
+
+.hint-clicked {
+    cursor: default;
+}
+
+.hint-clicked:hover {
+    border-bottom: none
+}
+
+table {
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.cell {
+    background-color: rgb(247, 234, 241);
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    text-align: center;
+    color: black;
+    border-style: groove;
+    border-radius: 10px;
+    border-width: 5px;
+    padding: 5px;
+    margin: 15px;
+    box-shadow: 5px 10px #888888;
+}
+
+.cell-element {
+    display: none;
+}
+
+.cell:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.clicked-Cell {
+    background-color: rgb(178, 240, 220);
 }
 
 .btn-dec {
@@ -32,181 +143,28 @@ h1 {
 
 .btn-dec:hover {
     opacity: 0.7;
-    transform: scale(1.1);
     background-color: rgb(192, 195, 196);
 }
 
-/* 
-.safe-click{
-    padding: 0.3em 1.2em;
-    border-radius: 2em;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: rgb(37, 71, 122);
-    outline: none;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    text-align: center;
-    transition: all 0.2s;
-    margin-bottom: 10px;
-    font-family: 'Amatic SC', cursive;
-    font-size: 30px;
-    border: solid rgb(230, 242, 248);
-    margin-top: 20px;
-}
-.safe-click:hover{
-    opacity: 0.7;
-    transform: scale(1.1);
-    background-color: rgb(192, 195, 196);
-} */
-
-.data {
-    margin-top: 20px;
-}
-
-.modal-live{
-    font-size: 30px;
-}
-
-.func{
-    background-color: rgb(111, 116, 108);
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    color: white;
-    border-style: double;
-    padding: 5px;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 25px;
-}
-
-/* .time {
-    background-color: rgb(111, 116, 108);
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    color: white;
-    border-style: double;
-    padding: 5px;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 25px;
-}
-
-.number {
-    background-color: rgb(111, 116, 108);
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    color: white;
-    border-style: double;
-    padding: 5px;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 25px;
-} */
-
-.manually{
-    background-color: rgb(233, 233, 248);
-    border: solid rgb(25, 25, 26);
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transform: 3s;
-}
-.manually:hover{
-    opacity: 0.9;
-    background-color: blueviolet;
-}
-
-fieldset {
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
-    padding-block-start: 0.35em;
-    padding-inline-start: 0.75em;
-    padding-inline-end: 0.75em;
-    padding-block-end: 0.625em;
-    min-inline-size: min-content;
-    border-image: initial;
-    margin: 20px;
-    border-style: double;
-    /* width: 300px;
-    height: 85px; */
-    display: inline;
-    background-color: #f3f2d1;
-    border-width: 5px;
-    border-radius: 20px;
-    font-size: 20px;
-}
-
-.cell {
-    background-color: rgb(247, 234, 241);
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
-    text-align: center;
-    color: black;
-    border-style: groove;
-    border-radius: 10px;
-    border-width: 5px;
-    padding: 5px;
-    margin: 20px;
-    box-shadow: 5px 10px #888888;
-}
-
-.cell-element {
-    display: none;
-}
-
-.cell:hover {
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.clicked-Cell {
-    background-color: rgb(187, 197, 194);
-    font-size: 20px;
-}
-
-
-table {
+.manually {
+    display: block;
     margin: 0 auto;
-    margin-top: 30px;
 }
 
-img {
-    width: 60px;
-    height: auto;
-    cursor: pointer;
-}
-
-img:hover {
-    border-bottom: 1px solid black;
-}
-
-.hint-clicked{
-    cursor:default;
-}
-
-.hint-clicked:hover{
-    border-bottom:none
-}
-
-.modal-win {
-    height: 20vh;
-    width: 25vw;
-    background-color: rgba(90, 90, 90, 0.856);
+.modal-mines-manually {
+    height: 10vh;
+    width: 15vw;
+    background-color: rgb(203, 233, 222);
+    opacity: 0.8;
     position: fixed;
     z-index: 1;
     display: none;
     justify-content: center;
     align-items: center;
-    left: 8vw;
-    top: 190px;
-    font-size: 100px;
+    left: 20vw;
+    bottom: 300px;
+    font-size: 40px;
+    border-radius: 10px;
 }
 
 .rotate-center {

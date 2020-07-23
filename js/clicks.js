@@ -1,13 +1,12 @@
 
-
 function cellClicked(elCell, i, j) {
     if (!gGame.isOn) return;
     if (gBoard[i][j].isShown || !gCanClick) return;
     if (gGame.manually && gMinesInsert < gLevel.mines) {
-        gMinesInsert++;
-        cellPutMines(elCell, i, j, gBoard);
+       buildManullayBoard(elCell, i, j);   
     }
     else {
+        closeModalMines();
         if (!gGame.shownCount) {
             if (!gGame.manually) {
                 gBoard = getMinesLocations(gBoard, { i: i, j: j });
@@ -24,23 +23,18 @@ function cellClicked(elCell, i, j) {
         if (gBoard[i][j].minesAroundCount === 0 && gBoard[i][j].element !== MINE) {
             expandShown(gBoard, elCell, i, j);
         }
-        if (gBoard[i][j].element === MINE) clickedBoom();
+        if (gBoard[i][j].element === MINE) clickedBoom(elCell);
+
         cellChange(i, j, elCell, false);
         checkGameOver();
-
-        console.log('gMines', gMines);
-
+        gFirstClick = false;
     }
 }
 
-
-
 function cellMarked(elCell, i, j) {
-    if (gBoard[i][j].isShown) {
-        event.preventDefault();
-        return;
-    }
-    if (gBoard[i][j].isMarked === false) {
+    event.preventDefault();
+    if (!gCanClick || gBoard[i][j].isShown) return;
+    if (!gBoard[i][j].isMarked) {
         elCell.innerText = GEUSS;
         gGame.markedCount++;
     } else {
@@ -48,51 +42,28 @@ function cellMarked(elCell, i, j) {
         elCell.innerText = '';
     }
     gBoard[i][j].isMarked = !gBoard[i][j].isMarked;
-    event.preventDefault();
     checkGameOver();
     renderNumbersOfGuess();
 }
 
-
-function clickedBoom() {
+function clickedBoom(elChoose) {
     gGame.liveUsed++;
     gLivesCount--;
-    if (gLivesCount === 0) {
+    if (gLivesCount < 0) {
         for (var i = 0; i < gMines.length; i++) {
             var cell = gMines[i];
             var selector = '.cell-' + cell.i + "-" + cell.j;
             var elCell = document.querySelector(selector);
             cellChange(cell.i, cell.j, elCell);
         }
+        elChoose.style.backgroundColor = 'rgb(209, 30, 30)';
         endGame('you loose', false);
     }
     renderLives();
 }
 
-
-
-function markSafeClick() {
-    if (!gGame.safeClick) return;
-    var empties = getAllLocations();
-    var randCell = getRandomInteger(0, empties.length - 1);
-    var randLocation = empties[randCell];
-    console.log(randLocation);
-    while (gBoard[randLocation.i][randLocation.j].isShown) {
-        empties.splice(randCell, 1);
-        var randCell = getRandomInteger(0, empties.length - 1);
-        var randLocation = empties[randCell];
-    }
-
-    showCell(randLocation.i, randLocation.j);
-    setTimeout(() => {
-        var selector = '.cell-' + randLocation.i + "-" + randLocation.j;
-        hideCell(selector);
-    }, 1000);
-    gGame.safeClick--;
-}
-
 function goBack() {
-    if (!gMoves.length) return;
+    if (!gMoves.length || !gCanClick) return;
     var move = gMoves.splice(gMoves.length - 1, 1);
     var moves = [];
     moves.push(...move[0]);
@@ -107,9 +78,43 @@ function goBack() {
 
 }
 
-function manuallyPositionClicked() {
-    init();
-    gGame.manually = true;
+// function goBack() {
+//     if (!gMoves.length || !gCanClick) return;
+
+//     var board = gOldBoards.splice(gOldBoards.length-1, 1);
+//     console.log("goBack -> gOldBoards", gOldBoards)
+//     // var boards = [];
+//     // boards.push(...board[0]);
+//     console.log('board',board[0]);
+
+//     randerBoardForUndo(board[0]);
+// }
+
+
+function goBack() {
+    if (!gMoves.length || !gCanClick) return;
+    var move = gMoves.splice(gMoves.length - 2, 1);
+    var moves = [];
+    moves.push(...move[0]);
+    for (var i = 0; i < moves.length; i++) {
+        var selector = '.cell-' + moves[i].i + "-" + moves[i].j;
+        var elCell = document.querySelector(selector);
+        elCell.innerText = '';
+        gBoard[moves[i].i][moves[i].j].isShown = false;
+        elCell.classList.remove('clicked-Cell');
+        gGame.shownCount--;
+    }
+
 }
 
+function newGame() {
+    var size = gLevel.size;
+    init(size);
+}
 
+function revelNegs(i,j){
+    var pos = {i:i,j:j};
+    if(gBoard[i][j].isShown) {
+        openNegsForDubleClick(gBoard,pos);
+    }
+}

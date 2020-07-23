@@ -8,6 +8,8 @@ var gLivesCount;
 var gMoves;
 var gMinesInsert;
 var gCanClick;
+var gFirstClick;
+var gOldBoards;
 
 
 const MINE = '💣'
@@ -25,21 +27,26 @@ function init(size = 4) {
         safeClick: 3,
         manually: false
     }    
+    gOldBoards = [];
     gMoves = [];
     gMines = [];
-    closeModal();
     gMinesInsert = 0;
     gCanClick = true;
     gLevel = setLevel(size);
     gBoard = buildBoard();
-    randerHints();
-    renderBoard(gBoard);
+    gOldBoards.push(gBoard);
     gLivesCount = 3;
+    gFirstClick = true;
+    renderBoard(gBoard);
+    randerHints();
     renderTimeLabel();
     renderNumbersOfGuess();
     renderEmoji();
     renderLives();
-
+    renderScoreToAllLevels();
+    renderSafeClick();
+    closeModalMines();
+    modalLives('visible');
 }    
 
 function setLevel(size) {
@@ -48,28 +55,32 @@ function setLevel(size) {
         case 4: {
             level = {
                 size: 4,
-                mines: 2
+                mines: 2,
+                name: "Easy"
             }    
             break;
         }    
         case 8: {
             level = {
                 size: 8,
-                mines: 12
+                mines: 12,
+                name: "Hard"
             }    
             break;
         }    
         case 12: {
             level = {
                 size: 12,
-                mines: 30
+                mines: 30,
+                name: "Extrenel"
             }    
             break;
         }    
         default: {
             level = {
                 size: 4,
-                mines: 2
+                mines: 2,
+                name: "Easy"
             }    
             break;
         }    
@@ -96,7 +107,6 @@ function buildBoard() {
     return board;
 }    
 
-
 function getMinesLocations(board, location) {
     gMines = [];
     var locations = getAllLocations();
@@ -113,7 +123,6 @@ function getMinesLocations(board, location) {
     return board;
 }    
 
-
 function insertMines(randLocation, board) {
     var cell = {
         minesAroundCount: 0,
@@ -123,9 +132,7 @@ function insertMines(randLocation, board) {
         element: MINE
     }    
     board[randLocation.i][randLocation.j] = cell;
-    console.log("insertMines -> randLocation", randLocation)
     gMines.push(randLocation);
-    console.log("insertMines -> gMines", gMines)
 }    
 
 
@@ -137,58 +144,27 @@ function updateNegs(cell) {
     }    
 }    
 
-
 function checkGameOver() {
     if (gGame.markedCount + gGame.liveUsed === gLevel.mines) {
-        if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return
+        if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;        
+        saveScore(gLevel.name, gGame.secsPassed);
         endGame('You win', true);
     }    
 }    
 
 function endGame(txt, win) {
-    openModal(txt);
     var elNewGame = document.querySelector('.new-game');
-    clearTimeout(gInteravlTime);
     elNewGame.innerText = win ? '🥰' : '😭';
-    renderTimeLabel();
     gGame.isOn = false;
+    gCanClick = false;
+    renderTimeLabel();
+    clearTimeout(gInteravlTime);
+    modalLives('hidden');
 }    
 
 
-function openModal(msg) {
-    var elModal = document.querySelector('.modal-win');
-    elModal.style.display = 'block';
-    elModal.innerText = msg;
-}    
-
-function closeModal() {
-    var elModal = document.querySelector('.modal-win');
-    elModal.style.display = 'none';
-    elModal.innerText = '';
-}    
-
-function cellPutMines(elCell, i, j, board) {
-    gGame.manually = true;
-    var location = { i: i, j: j };
-    if (gMines.includes(location)) {
-        gMinesInsert--;
-        return;
-    }
-    insertMines(location, board);
-    showCell(i, j);
-    if (gMinesInsert === gLevel.mines) {
-        gCanClick = false;
-        setTimeout(() => {
-            gCanClick = true;
-            hideCells()
-        }, 1000);
-    }
+function modalLives(visbility){
+    var elModelLives = document.querySelector('.modal-live');
+    elModelLives.style.visibility = visbility;
 }
 
-function hideCells() {
-    for (var i = 0; i < gMines.length; i++) {
-        var selector = '.cell-' + gMines[i].i + "-" + gMines[i].j;
-        hideCell(selector);
-    }
-    updateNegs();
-}
