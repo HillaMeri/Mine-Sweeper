@@ -1,7 +1,6 @@
-var gMyStorage;
+
 
 function saveScore(level, score) {
-    console.log("saveScore -> localStorage", localStorage)
     if (typeof (Storage) !== "undefined") {
         if (localStorage.getItem(level) === null || score < localStorage.getItem(level)) {
             localStorage.setItem(level, score);
@@ -22,7 +21,9 @@ function renderScoreToAllLevels() {
 }
 
 function clearScore() {
-    localStorage.clear();
+    localStorage.removeItem("Easy");
+    localStorage.removeItem("Hard");
+    localStorage.removeItem("Extrenel");
     document.getElementById("score Easy").querySelector('span').innerText = '';
     document.getElementById("score Hard").querySelector('span').innerText = '';
     document.getElementById("score Extrenel").querySelector('span').innerText = '';

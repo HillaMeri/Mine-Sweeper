@@ -2,15 +2,7 @@
 var gLevel;
 var gBoard;
 var gGame;
-var gMines;
-var gLivesCount;
-var gMinesInsert;
-var gCanClick;
-var gFirstClick;
-var gPrevBoards;
 var gInteravlLive;
-var gMovesCount;
-var gRevelMines;
 
 //ELEMENTS
 const MINE = '💣'
@@ -27,21 +19,21 @@ function init(size = 4) {
         secsPassed: 0,
         liveUsed: 0,
         safeClick: 3,
-        manually: false
+        manually: false,
+        prevBoards: [],
+        movesCount: 0,
+        mines: [],
+        minesInsert: 0,
+        revelMines: 0,
+        canClick: true,
+        livesCount: 3,
+        firstClick: true,
+        hints: ''
     }
-    gPrevBoards = [];
-    gMovesCount = 0;
-    gMines = [];
-    gMinesInsert = 0;
-    gRevelMines = 0;
-    gCanClick = true;
     gLevel = setLevel(size);
     gBoard = buildBoard();
-    gPrevBoards = [];
-    gLivesCount = 3;
-    gFirstClick = true;
     renderBoard(gBoard);
-
+    // randerBoardForUndo(gBoard);
     randerHints();
     renderTimeLabel();
     renderNumbersOfGuess();
@@ -51,7 +43,7 @@ function init(size = 4) {
     renderSafeClick();
     closeModalMines();
     clearInterval(gInteravlLive);
-    gInteravlLive = setInterval(modalLives, 1500)
+    gInteravlLive = setInterval(modalLives, 1500);
 }
 
 /* Function Description: get input from the user and 
@@ -126,7 +118,7 @@ function checkGameOver() {
              console.log();
         if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
         saveScore(gLevel.name, gGame.secsPassed);
-        endGame('You win', true);
+        endGame(true);
     }
 }
 
@@ -136,9 +128,9 @@ function endGame(win) {
     var elNewGame = document.querySelector('.new-game');
     elNewGame.innerText = win ? '🥰' : '😭';
     gGame.isOn = false;
-    gCanClick = false;
-    renderTimeLabel();
-    clearInterval(gInteravlLive);
+    gGame.canClick = false;
+    clearInterval(gInteravlLive); 
+    clearInterval(gInteravlTime); 
 }
 
 /* Function Description: this function work with interval from init function,

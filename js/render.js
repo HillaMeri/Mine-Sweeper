@@ -1,3 +1,4 @@
+
 function renderBoard(board) {
     var htmlStr = '';
     for (var i = 0; i < gLevel.size; i++) {
@@ -11,7 +12,6 @@ function renderBoard(board) {
     }
     var elBoard = document.querySelector('.board');
     elBoard.innerHTML = htmlStr;
-
 }
 
 function randerBoardForUndo(board) {
@@ -32,7 +32,7 @@ function randerBoardForUndo(board) {
                 el = board[i][j].element ? board[i][j].element : '';
                 addClass = "clicked-Cell";
             }
-            
+
             var className = "cell-" + i + "-" + j;
             htmlStr += `<td class="cell ${className} ${addClass} "
              onclick = "cellClicked(this, ${i},${j})" 
@@ -63,16 +63,17 @@ function renderEmoji() {
 
 function renderLives() {
     var elLives = document.querySelector('.modal-live');
-    elLives.innerText = (gLivesCount >= 0) ? 'YOU HAVE ' + gLivesCount + ' LIVES ❤' : '';
+    elLives.innerText = (gGame.livesCount >= 0) ? 'YOU HAVE ' + gGame.livesCount + ' LIVES ❤' : '';
 }
 
 
 function randerHints() {
     gHint = false;
     var elHints = document.querySelector('.hints');
-    elHints.innerHTML = `<img src="img/2.png" onclick="hintClicked(this)"
-     /><img src="img/2.png" onclick="hintClicked(this)" />
+    elHints.innerHTML = `<img src="img/2.png" onclick="hintClicked(this)"/>
+    <img src="img/2.png" onclick="hintClicked(this)" />
     <img src="img/2.png" onclick="hintClicked(this)" />`
+    gGame.hints = elHints.innerHTML;
 }
 
 
@@ -84,5 +85,9 @@ function renderSafeClick() {
     if (!gGame.safeClick) sign = '❌'
     var elSafeClick = document.querySelector('.safe-click');
     elSafeClick.innerText = sign;
+}
 
+function randerHintsForSaveGame() {
+    var elHints = document.querySelector('.hints');
+    elHints.innerHTML = gGame.hints;
 }

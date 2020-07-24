@@ -47,7 +47,6 @@ function openNegsForDubleClick(board, pos) {
     }
 }
 
-//for empty places
 function openNegs(board, pos) {
     var movesNegs = [];
     if (board[pos.i][pos.j].minesAroundCount) return;
@@ -65,10 +64,12 @@ function openNegs(board, pos) {
     }
 }
 
+
 function expandShown(board, elCell, i, j) {
     var pos = { i: i, j: j };
     var l = openNegs(board, pos);
 }
+
 
 function openNegsWithBooms(board, pos) {
     var negs = [];
@@ -84,11 +85,13 @@ function openNegsWithBooms(board, pos) {
     return negs;
 }
 
+
 function showCell(i, j) {
     var selector = '.cell-' + i + "-" + j;
     var elCell = document.querySelector(selector);
     elCell.innerText = gBoard[i][j].element;
 }
+
 
 function hideCell(selector) {
     var elCell = document.querySelector(selector);

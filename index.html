@@ -15,10 +15,11 @@
         <label id="score Hard">Hard Record: <span></span> || </label>
         <label id="score Extrenel">Extrenel Record: <span></span></label>
     </div>
-
-    <button class="clear-score" onclick="clearScore()">Clear Records</button>
+    <button class="clear-score save" onclick="clearScore()">Clear Records</button>
+    <button class="save-game save" onclick="saveGame('game','board','level','time')">SAVE GAME</button>
+    <button class="open-save-game save" onclick="openSaveGame('game','board','level','time')">OPEN SAVE GAME</button>
     <div class="modal-live heartbeat"></div>
-    
+
     <div class="data">
         <label class="func time"> Game Time: </label>
         <label class="func number"></label>
@@ -53,7 +54,7 @@
     <script src=" js/score.js"></script>
     <script src=" js/manually.js"></script>
     <script src=" js/mines.js"></script>
+    <script src=" js/savegame.js"></script>
 </body>
 
 </html>
-

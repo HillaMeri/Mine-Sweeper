@@ -2,7 +2,7 @@ var gInteravlTime;
 var gTime;
 
 function renderTimeLabel() {
-    clearTimeout(gInteravlTime);
+    clearInterval(gInteravlTime);
     var elTime = document.querySelector('.time');
     elTime.innerHTML = '⏳Game Time:';
 }

@@ -1,13 +1,13 @@
 
 /* Function Description: when cell clicked check all the edge cases
 build new board- for manually or random. Take the time for first click,
-active recursion if needed, reneder the clicked cell and save the prev board in - gPrevBoards
+active recursion if needed, reneder the clicked cell and save the prev board in - gGame.prevBoards
  */
 function cellClicked(elCell, i, j) {
     var copyBoard = [];
     if (!gGame.isOn) return;
-    if (gBoard[i][j].isShown || !gCanClick) return;
-    if (gGame.manually && gMinesInsert < gLevel.mines) {
+    if (gBoard[i][j].isShown || !gGame.canClick) return;
+    if (gGame.manually && gGame.minesInsert < gLevel.mines) {
         buildManullayBoard(elCell, i, j);
     }
     else {
@@ -22,7 +22,7 @@ function cellClicked(elCell, i, j) {
                 updateNegs();
             }
             copyBoard = copyAllBoard(gBoard);
-            gPrevBoards.push(copyBoard);
+            gGame.prevBoards.push(copyBoard);
             gTime = new Date();
             gTime = gTime.getTime();
             renderTime();
@@ -33,11 +33,11 @@ function cellClicked(elCell, i, j) {
         if (gBoard[i][j].element === MINE) clickedMine(elCell);
         cellChange(i, j, elCell, false);
         checkGameOver();
-        gFirstClick = false;
+        gGame.firstClick = false;
     }
-    gMovesCount++;
+    gGame.movesCount++;
     copyBoard = copyAllBoard(gBoard);
-    gPrevBoards.push(copyBoard);
+    gGame.prevBoards.push(copyBoard);
 }
 
 
@@ -46,7 +46,7 @@ function cellClicked(elCell, i, j) {
 and check if the game is over */
 function cellMarked(elCell, i, j) {
     event.preventDefault();
-    if (!gCanClick || gBoard[i][j].isShown) return;
+    if (!gGame.canClick || gBoard[i][j].isShown) return;
     if (!gBoard[i][j].isMarked) {
         elCell.innerText = GEUSS;
         gGame.markedCount++;
@@ -56,7 +56,7 @@ function cellMarked(elCell, i, j) {
     }
     gBoard[i][j].isMarked = !gBoard[i][j].isMarked;
     copyBoard = copyAllBoard(gBoard);
-    gPrevBoards.push(copyBoard);
+    gGame.prevBoards.push(copyBoard);
     checkGameOver();
     renderNumbersOfGuess();
 }
@@ -66,16 +66,16 @@ function cellMarked(elCell, i, j) {
 if we loose- print all the mines on the board and end game */
 function clickedMine(elChoose) {
     gGame.liveUsed++;
-    gLivesCount--;
-    if (gLivesCount < 0) {
-        for (var i = 0; i < gMines.length; i++) {
-            var cell = gMines[i];
+    gGame.livesCount--;
+    if (!gGame.livesCount) {
+        for (var i = 0; i < gGame.mines.length; i++) {
+            var cell = gGame.mines[i];
             var selector = '.cell-' + cell.i + "-" + cell.j;
             var elCell = document.querySelector(selector);
             cellChange(cell.i, cell.j, elCell);
         }
         elChoose.style.backgroundColor = 'rgb(209, 30, 30)';
-        endGame('you loose', false);
+        endGame(false);
     }
     renderLives();
 }
@@ -85,11 +85,11 @@ we have all the previous boards in - gPrevBoard
 we go to the last place and recover the last board
 we cant recover the first click */
 function goBack() {
-    if (gMovesCount < 1 || gPrevBoards.length === 2 || !gCanClick) return;
-    var board = gPrevBoards.splice(gPrevBoards.length - 2, 1);
+    if (gGame.movesCount < 1 || gGame.prevBoards.length === 2 || !gGame.canClick) return;
+    var board = gGame.prevBoards.splice(gGame.prevBoards.length - 2, 1);
     gBoard = copyAllBoard(board[0]);
     randerBoardForUndo(gBoard);
-    gMovesCount--;
+    gGame.movesCount--;
 }
 
 /* Function Description: on double click we get all the negs 
