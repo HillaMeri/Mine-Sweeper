@@ -1,6 +1,7 @@
 var gMyStorage;
 
 function saveScore(level, score) {
+    console.log("saveScore -> localStorage", localStorage)
     if (typeof (Storage) !== "undefined") {
         if (localStorage.getItem(level) === null || score < localStorage.getItem(level)) {
             localStorage.setItem(level, score);
@@ -11,7 +12,7 @@ function saveScore(level, score) {
 
 function renderScore(level) {
     if (localStorage.getItem(level) !== null)
-        document.getElementById("score " + level).querySelector('span').innerText = localStorage.getItem(level);
+        document.getElementById("score " + level).querySelector('span').innerText = localStorage.getItem(level) + ' secs';
 }
 
 function renderScoreToAllLevels() {

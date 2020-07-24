@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    font-family: 'Rowdies', cursive;
+    font-family: 'Chewy', cursive;
     color: rgb(12, 11, 11);
     background-image: url("../img/bcg4.jpg");
 }
@@ -22,10 +22,11 @@ h1 {
     transition: all 0.2s;
     margin-bottom: 5px;
     margin-top: 5px;
-    font-family: 'Amatic SC', cursive;
     font-size: 15px;
     border: solid rgb(230, 242, 248);
     cursor: pointer;
+    font-family: 'Chewy', cursive;
+
 }
 
 .clear-score:hover {
@@ -140,7 +141,6 @@ table {
     text-align: center;
     transition: all 0.2s;
     margin-bottom: 10px;
-    font-family: 'Amatic SC', cursive;
     font-size: 20px;
     border: solid rgb(230, 242, 248);
     margin-top: 20px;
@@ -156,6 +156,7 @@ table {
     display: block;
     margin: 0 auto;
     border: solid 3px black;
+    font-family: 'Chewy', cursive;
 }
 
 .modal-mines-manually {
@@ -168,11 +169,10 @@ table {
     display: none;
     justify-content: center;
     align-items: center;
-    left: 20vw;
+    left: 15vw;
     bottom: 50vh;
     font-size: 40px;
     border-radius: 10px;
-    font-family: 'Amatic SC', cursive;
 
 }
 

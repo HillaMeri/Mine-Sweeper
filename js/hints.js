@@ -1,9 +1,8 @@
-var gHintCell;
-var gHintCount;
 var gHint;
 
-const LIME = ''
-
+/* Function Description: if lamp-hint clicked
+change the lamp color and change the status to gHint is on
+now that its on when we click on cell we reveal it and is negs*/
 function hintClicked(elImg) {
     if (!gGame.isOn || gFirstClick) return;
     if (elImg.src === "http://127.0.0.1:5500/img/1.png") return;
@@ -12,6 +11,7 @@ function hintClicked(elImg) {
     elImg.classList.add("hint-clicked");
 }
 
+/* Function Description: open the cell and the negs for second*/
 function hintShow(i, j) {
     var cell = { i: i, j: j };
     var negs = openNegsWithBooms(gBoard, cell);
@@ -23,6 +23,7 @@ function hintShow(i, j) {
     }, 1000);
 }
 
+/* Function Description: close the cell and the negs */
 function hintHide(negs) {
     for (var i = 0; i < negs.length; i++) {
         var selector = '.cell-' + negs[i].i + "-" + negs[i].j;
@@ -30,12 +31,13 @@ function hintHide(negs) {
     }
 }
 
-
+/* Function Description: get all the un shown cells in the board,
+if only mines left- return
+take a random place until un shown, show the cell for second*/
 function markSafeClick() {
     if (!gGame.safeClick || !gCanClick || gFirstClick) return;
     var empties = getAllLocations();
     if (!empties.length) return;
-    //TODO: handle this case, no emptis - no hints
     var randCell = getRandomInteger(0, empties.length - 1);
     var randLocation = empties[randCell];
 

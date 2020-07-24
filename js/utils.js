@@ -23,7 +23,6 @@ function countNegs(board, pos) {
 }
 
 function openNegsForDubleClick(board, pos) {
-    var movesNegs = [];
     var flag = true;
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
@@ -42,12 +41,10 @@ function openNegsForDubleClick(board, pos) {
                 var selector = '.cell-' + i + "-" + j;
                 var elCell = document.querySelector(selector);
                 cellChange(i, j, elCell, true);
-                // movesNegs.push({ i: i, j: j })
                 openNegs(board, { i: i, j: j });
             }
         }
     }
-    // gMoves.push(movesNegs);
 }
 
 //for empty places
@@ -62,12 +59,10 @@ function openNegs(board, pos) {
                 var selector = '.cell-' + i + "-" + j;
                 var elCell = document.querySelector(selector);
                 cellChange(i, j, elCell, true);
-                // movesNegs.push({ i: i, j: j });
                 openNegs(board, { i: i, j: j });
             }
         }
     }
-    // gMoves.push(movesNegs);
 }
 
 function expandShown(board, elCell, i, j) {

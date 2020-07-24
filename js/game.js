@@ -1,5 +1,4 @@
 'use strict'
-
 var gLevel;
 var gBoard;
 var gGame;
@@ -13,11 +12,13 @@ var gInteravlLive;
 var gMovesCount;
 var gRevelMines;
 
+//ELEMENTS
 const MINE = '💣'
 const EMPTY = '';
 const GEUSS = '🚩';
 
 
+/* Function Description: initialize the game */
 function init(size = 4) {
     gGame = {
         isOn: true,
@@ -53,6 +54,8 @@ function init(size = 4) {
     gInteravlLive = setInterval(modalLives, 1500)
 }
 
+/* Function Description: get input from the user and 
+set the size of the board the number of mines- gLevel */
 function setLevel(size) {
     var level;
     switch (size) {
@@ -92,6 +95,7 @@ function setLevel(size) {
     return level;
 }
 
+/* Function Description: build the board with default inputs */
 function buildBoard() {
     var board = [];
     for (var i = 0; i < gLevel.size; i++) {
@@ -111,6 +115,11 @@ function buildBoard() {
     return board;
 }
 
+/* Function Description: every click on cell, check if: 
+1. all the board is marked or shown
+2. all the marked places are mines. 
+if end game- save the score
+ */
 function checkGameOver() {
     if (gGame.markedCount + gGame.liveUsed === gLevel.mines ||
          gGame.shownCount ===  gLevel.size * gLevel.size) {
@@ -121,7 +130,9 @@ function checkGameOver() {
     }
 }
 
-function endGame(txt, win) {
+/* Function Description: if the game end, check from the input if it was
+win or loose, print the relavent emoji */
+function endGame(win) {
     var elNewGame = document.querySelector('.new-game');
     elNewGame.innerText = win ? '🥰' : '😭';
     gGame.isOn = false;
@@ -130,9 +141,15 @@ function endGame(txt, win) {
     clearInterval(gInteravlLive);
 }
 
-
+/* Function Description: this function work with interval from init function,
+its print to the howling of number of lives that left */
 function modalLives() {
     var elModelLives = document.querySelector('.modal-live');
     elModelLives.classList.toggle('heartbeat');
 }
 
+/* Function Description: start a new game */
+function newGame() {
+    var size = gLevel.size;
+    init(size);
+}
