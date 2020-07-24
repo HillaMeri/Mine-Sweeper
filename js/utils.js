@@ -99,8 +99,8 @@ function hideCell(selector) {
 }
 
 function hideCells() {
-    for (var i = 0; i < gMines.length; i++) {
-        var selector = '.cell-' + gMines[i].i + "-" + gMines[i].j;
+    for (var i = 0; i < gGame.mines.length; i++) {
+        var selector = '.cell-' + gGame.mines[i].i + "-" + gGame.mines[i].j;
         hideCell(selector);
     }
     updateNegs();

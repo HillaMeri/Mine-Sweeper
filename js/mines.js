@@ -1,7 +1,7 @@
 /* Function Description: if the board is buils automatic
 we need to put the mines in some random places on the board*/
 function getMinesLocations(board, location) {
-    gMines = [];
+    gGame.mines = [];
     var locations = getAllLocations();
     for (var i = 0; i < gLevel.mines; i++) {
         var randNumb = getRandomInteger(0, locations.length - 1);
@@ -26,7 +26,7 @@ function insertMines(randLocation, board) {
         element: MINE
     }    
     board[randLocation.i][randLocation.j] = cell;
-    gMines.push(randLocation);
+    gGame.mines.push(randLocation);
 }    
 
 /* Function Description: over the board and put in the cell how much mines negs it has*/
