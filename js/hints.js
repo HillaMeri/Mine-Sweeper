@@ -5,11 +5,11 @@ change the lamp color and change the status to gHint is on
 now that its on when we click on cell we reveal it and is negs*/
 function hintClicked(elImg) {
     if (!gGame.isOn || gGame.firstClick) return;
-    if (elImg.src === "http://127.0.0.1:5500/img/1.png") return;
+    if (elImg.src === "img/1.png") return;
+    //if (elImg.src === "http://127.0.0.1:5500/img/1.png") return;
     gHint = true;
     elImg.src = "img/1.png";
     elImg.classList.add("hint-clicked");
-    
     gGame.hints = saveHintsClicked();
 }
 
@@ -17,7 +17,6 @@ function saveHintsClicked() {
     var elHints = document.querySelector('.hints');
     return elHints.innerHTML;
 }
-
 
 /* Function Description: open the cell and the negs for second*/
 function hintShow(i, j) {

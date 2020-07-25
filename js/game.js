@@ -17,23 +17,21 @@ function init(size = 4) {
         shownCount: 0,
         markedCount: 0,
         secsPassed: 0,
-        liveUsed: 0,
         safeClick: 3,
         manually: false,
         prevBoards: [],
-        movesCount: 0,
         mines: [],
         minesInsert: 0,
         revelMines: 0,
         canClick: true,
         livesCount: 3,
         firstClick: true,
-        hints: ''
+        hints: '',
+        minesExpoed: 0
     }
     gLevel = setLevel(size);
     gBoard = buildBoard();
-    renderBoard(gBoard);
-    // randerBoardForUndo(gBoard);
+    randerBoard(gBoard);
     randerHints();
     renderTimeLabel();
     renderNumbersOfGuess();
@@ -108,40 +106,53 @@ function buildBoard() {
 }
 
 /* Function Description: every click on cell, check if: 
-1. all the board is marked or shown
-2. all the marked places are mines. 
-if end game- save the score
- */
+1. The marked cell and expoed mines are the nums of mines in the game
+2. All the shown and marked cells are the nums of the cells in the board.
+If end game- save the score */
 function checkGameOver() {
-    if (gGame.markedCount + gGame.liveUsed === gLevel.mines ||
+    if (gGame.markedCount + gGame.minesExpoed === gLevel.mines ||
          gGame.shownCount ===  gLevel.size * gLevel.size) {
-             console.log();
         if (gGame.markedCount + gGame.shownCount !== gLevel.size * gLevel.size) return;
+        playVictorySound();
         saveScore(gLevel.name, gGame.secsPassed);
-        endGame(true);
+        endGame(true,'You Win !');
     }
 }
 
 /* Function Description: if the game end, check from the input if it was
-win or loose, print the relavent emoji */
-function endGame(win) {
+win or loose, print the relevant emoji */
+function endGame(win,msg) {
     var elNewGame = document.querySelector('.new-game');
     elNewGame.innerText = win ? '🥰' : '😭';
     gGame.isOn = false;
     gGame.canClick = false;
     clearInterval(gInteravlLive); 
+    msgOfWinOrLoose(msg);
     clearInterval(gInteravlTime); 
 }
 
 /* Function Description: this function work with interval from init function,
-its print to the howling of number of lives that left */
+prints in beats the num of lives left */
 function modalLives() {
     var elModelLives = document.querySelector('.modal-live');
     elModelLives.classList.toggle('heartbeat');
 }
 
+
+function msgOfWinOrLoose(msg) {
+    var elModelLives = document.querySelector('.modal-live');
+    elModelLives.innerText = msg;
+}
+
+
 /* Function Description: start a new game */
 function newGame() {
     var size = gLevel.size;
     init(size);
+}
+
+
+function playVictorySound(){
+    var elVicAudio = document.querySelector('.victory-sound');
+    elVicAudio.play();
 }

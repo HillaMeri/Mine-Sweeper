@@ -37,3 +37,9 @@ function updateNegs(cell) {
         }    
     }    
 }    
+
+function mineSound(){
+    var elMineAudio = document.querySelector('.mine-sound');
+    console.log(elMineAudio);
+    elMineAudio.play();
+}

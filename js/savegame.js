@@ -1,4 +1,5 @@
 
+/* Function Description: when we save game we need to set all the game data in locl storage*/
 function saveGame(game, board, level, time) {
     if(!gGame.isOn) return;
     if (typeof (Storage) !== "undefined") {
@@ -10,7 +11,8 @@ function saveGame(game, board, level, time) {
     init(gLevel.size);
 }
 
-
+/* Function Description: open a save game, get all the save data og the game and
+render the new data to the board with openGame function */
 function openSaveGame(game, board, level, time) {
     if (localStorage.getItem(game) !== null &&
         localStorage.getItem(board) !== null &&
@@ -25,9 +27,11 @@ function openSaveGame(game, board, level, time) {
     }
 }
 
-
+/* Function Description: open a save game, 
+ןnitializes the saved game with all the information in it - render into the board. 
+In addition creating a new time with the now time less time already play  */
 function openGame(board) {
-    randerBoardForUndo(board);
+    randerBoard(board);
     renderNumbersOfGuess();
     gTime = new Date();
     gTime = gTime.getTime() - gGame.secsPassed * 1000;

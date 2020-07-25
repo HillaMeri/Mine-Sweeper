@@ -15,15 +15,12 @@
         <label id="score Hard">Hard Record: <span></span> || </label>
         <label id="score Extrenel">Extrenel Record: <span></span></label>
     </div>
-    <button class="clear-score save" onclick="clearScore()">Clear Records</button>
-    <button class="save-game save" onclick="saveGame('game','board','level','time')">SAVE GAME</button>
-    <button class="open-save-game save" onclick="openSaveGame('game','board','level','time')">OPEN SAVE GAME</button>
-    <div class="modal-live heartbeat"></div>
-
-    <div class="data">
-        <label class="func time"> Game Time: </label>
-        <label class="func number"></label>
+    <div class="save-btns">
+        <button class="clear-score save" onclick="clearScore()">Clear Records</button>
+        <button class="save-game save" onclick="saveGame('game','board','level','time')">SAVE GAME</button>
+        <button class="open-save-game save" onclick="openSaveGame('game','board','level','time')">OPEN SAVE GAME</button>
     </div>
+    
     <fieldset>
         <input type="radio" onclick="init(4)" id="levelChoice1" name="level">
         <label for="levelChoice1">Easy(4)</label>
@@ -33,17 +30,28 @@
         <label for="levelChoice3">Extrenel!(12)</label>
     </fieldset>
 
+    <div class="modal-live heartbeat"></div>
+
+    <div class="data">
+        <label class="func time"> Game Time:</label>
+        <label class="func number"></label>
+    </div>
+
     <div class="hints"></div>
 
-    <table>
-        <tbody class="board"></tbody>
-    </table>
+    <table><tbody class="board"></tbody></table>
+    
     <button class="safe-click btn-dec" onclick=markSafeClick()>🤞🤞🤞</button>
     <button class="new-game btn-dec" onclick=newGame()>😄</button>
     <button class="undo btn-dec" onclick=goBack()>↪</button>
+
     <button class="manually btn-dec" onclick="manuallyPositionClicked()">Manually</button>
     <div class="modal-mines-manually rotate-center"></div>
 
+    <div class="modal-break-recored scale-up-center"></div>
+    
+    <audio class="mine-sound" src="audio/mine2.mp3"></audio>
+    <audio class="victory-sound" src="audio/victory.mp3"></audio>
 
     <script src=" js/game.js"></script>
     <script src=" js/utils.js"></script>

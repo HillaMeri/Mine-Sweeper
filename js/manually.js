@@ -29,8 +29,10 @@ function buildManullayBoard(elCell, i, j) {
     cellPutMines(elCell, i, j, gBoard);
 }
 
-/* Function Description: each mine, put in the place, if the user clicked
-on same cell twice- return*/
+/* Function Description:for each mine, put in the choosen place,
+ if the user clicked on same cell twice- return.
+ update the modal how much mines left, after all mines inserted close 
+ all the shown mines cells*/
 function cellPutMines(elCell, i, j, board) {
     var location = { i: i, j: j };
     var flag = false;
